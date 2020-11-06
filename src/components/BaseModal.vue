@@ -19,7 +19,7 @@ export default {
 	width: 100%;
 	height: 100vh;
 	z-index: 10;
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 dialog {
@@ -34,7 +34,7 @@ dialog {
 	background-color: white;
 	z-index: 100;
 	border: none;
-	animation: modal 0.4s ease-in-out forwards;
+	animation: modal 0.5s ease-in-out forwards;
 }
 
 @keyframes modal {
@@ -43,7 +43,7 @@ dialog {
 		transform: translateY(-200px);
 	}
 	50% {
-		transform: translateY(20px);
+		transform: translateY(10px);
 	}
 	100% {
 		opacity: 1;
