@@ -1,4 +1,5 @@
-<!--<template>
+<!--
+<template>
 	<div id="app">
 		<div id="nav">
 			<router-link to="/">Home</router-link> |
@@ -38,12 +39,12 @@
 		<button @click="animateBlock">Animate</button>
 	</div>
 	<div class="container">
-		<transition>
+		<transition name="para">
 			<p v-if="paraVisible">This is only sometimes visible</p>
 		</transition>
 		<button @click="toggleParagraph">Toggle Paragraph</button>
 	</div>
-	<base-modal @close="hideDialog" v-if="dialogIsVisible">
+	<base-modal @close="hideDialog" :open="dialogIsVisible">
 		<p>This is a test dialog!</p>
 		<button @click="hideDialog">Close it!</button>
 	</base-modal>
@@ -123,32 +124,32 @@ button:active {
 	animation: slide-fade 0.3s ease-out forwards;
 }
 
-/* .v-enter-from {
+.para-enter-from {
 	opacity: 0;
 	transform: translateY(-30px);
-} */
-.v-enter-active {
+}
+.para-enter-active {
 	animation: slide-fade 0.3s ease-in-out;
 }
 
-/* .v-active-to {
+.para-active-to {
 	opacity: 1;
 	transform: translateY(0);
-} */
+}
 
-/* .v-leave-from {
+.para-leave-from {
 	opacity: 1;
 	transform: translateY(0);
-} */
+}
 
-.v-leave-active {
+.para-leave-active {
 	animation: slide-fade 300ms ease-out;
 }
 
-/* .v-leave-to {
+.para-leave-to {
 	opacity: 0;
 	transform: translateY(30px);
-} */
+}
 
 @keyframes slide-fade {
 	0% {
