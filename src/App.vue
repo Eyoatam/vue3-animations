@@ -1,4 +1,3 @@
-
 <template>
 	<router-view v-slot="slotProps">
 		<transition name="fade-route" mode="out-in">
