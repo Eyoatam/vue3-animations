@@ -1,45 +1,16 @@
-<!--
-<template>
-	<div id="app">
-		<div id="nav">
-			<router-link to="/">Home</router-link> |
-			<router-link to="/about">About</router-link>
-		</div>
-		<router-view />
-	</div>
-</template>
-
-<style>
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-}
-
-#nav {
-	padding: 30px;
-}
-
-#nav a {
-	font-weight: bold;
-	color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-	color: #42b983;
-}
-</style>
--->
 
 <template>
-	<div class="container">
+	<router-view v-slot="slotProps">
+		<transition name="fade-route" mode="out-in">
+			<component :is="slotProps.Component"></component>
+		</transition>
+	</router-view>
+	<!-- <div class="container">
 		<div class="block" :class="{ animate: animatedBlock }"></div>
 		<button @click="animateBlock">Animate</button>
 	</div>
 	<div class="container">
-		<transition name="para">
+		<transition name="para" @before-enter="beforeEnter">
 			<p v-if="paraVisible">This is only sometimes visible</p>
 		</transition>
 		<button @click="toggleParagraph">Toggle Paragraph</button>
@@ -50,7 +21,7 @@
 	</base-modal>
 	<div class="container">
 		<button @click="showDialog">Show Dialog</button>
-	</div>
+	</div> -->
 </template>  
 
 <script>
@@ -59,6 +30,9 @@ export default {
 		return { dialogIsVisible: false, animatedBlock: false, paraVisible: false };
 	},
 	methods: {
+		beforeEnter() {
+			console.log('Before Enter');
+		},
 		animateBlock() {
 			this.animatedBlock = !this.animatedBlock;
 		},
@@ -120,35 +94,33 @@ button:active {
 }
 
 .animate {
-	/* transform: translate(500px, 150px);*/
 	animation: slide-fade 0.3s ease-out forwards;
 }
 
-.para-enter-from {
+.fade-route-enter-from,
+.fade-route-leave-to {
 	opacity: 0;
-	transform: translateY(-30px);
-}
-.para-enter-active {
-	animation: slide-fade 0.3s ease-in-out;
 }
 
-.para-active-to {
+.fade-route-enter-active {
+	transition: opacity 300ms ease-in-out;
+}
+
+.fade-route-leave-active {
+	transition: opacity 300ms ease-out;
+}
+
+.fade-route-enter-to,
+.fade-route-leave-from {
 	opacity: 1;
-	transform: translateY(0);
 }
 
-.para-leave-from {
-	opacity: 1;
-	transform: translateY(0);
+.route-enter-active {
+	animation: slide-fade 0.4s ease-in-out;
 }
 
-.para-leave-active {
-	animation: slide-fade 300ms ease-out;
-}
-
-.para-leave-to {
-	opacity: 0;
-	transform: translateY(30px);
+.route-leave-active {
+	animation: slide-fade 0.4s ease reverse;
 }
 
 @keyframes slide-fade {
